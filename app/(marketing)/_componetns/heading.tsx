@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export const Heading = () => {
   return (
@@ -12,10 +13,12 @@ export const Heading = () => {
       <h3 className="text-base sm:text-xl md:text-2xl font-medium">
         ドキュメントの作成、ナレッジの整理、プロジェクトの管理を、ひとつのワークスペースで行うことができます。
       </h3>
-      <Button>
-        Notionを無料で入手
-        <ArrowRight className="h-4 w-4 ml-2" />
-      </Button>
+      <Link href="/documents">
+        <Button>
+          Notionを無料で入手
+          <ArrowRight className="h-4 w-4 ml-2" />
+        </Button>
+      </Link>
     </div>
   );
 };
