@@ -40,11 +40,11 @@ const DocumentPage = () => {
         className="hidden dark:block"
       />
       <h2 className="text-lg font-medium">
-        Welcome to {user?.username}&apos;s Notion
+        {user?.username}のNotionにようこそ!
       </h2>
       <Button onClick={onCreate}>
         <PlusCircle className="h-4 w-4 mr-2" />
-        Create a note
+        ノートを作成
       </Button>
     </div>
   );
