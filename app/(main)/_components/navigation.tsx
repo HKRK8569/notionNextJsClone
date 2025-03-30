@@ -15,7 +15,7 @@ import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { UserItem } from "./userItem";
 import { Item } from "./item";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { DocumentList } from "./document-list";
@@ -26,8 +26,10 @@ import {
 } from "@/components/ui/popover";
 import { TrashBox } from "./trash-box";
 import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/use-setting";
 
 export const Navigation = () => {
+  const settings = useSettings();
   const search = useSearch();
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -151,7 +153,7 @@ export const Navigation = () => {
         <div>
           <UserItem />
           <Item label="Search" Icon={Search} isSearch onClick={search.onOpen} />
-          <Item label="Settings" Icon={Settings} onClick={() => {}} />
+          <Item label="Settings" Icon={Settings} onClick={settings.onOpen} />
           <Item onClick={handleCreate} label="New Page" Icon={PlusCircle} />
         </div>
         <div className="mt-4">
