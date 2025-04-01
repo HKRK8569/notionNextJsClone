@@ -227,6 +227,7 @@ export const remove = mutation({
   },
 });
 
+// 検索する関数
 export const getSearch = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -245,5 +246,34 @@ export const getSearch = query({
       .collect();
 
     return documents;
+  },
+});
+
+// idのdocumentを取得
+export const getById = query({
+  args: { documentId: v.id("documents") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    const document = await ctx.db.get(args.documentId);
+
+    if (!document) {
+      throw new Error("Not found");
+    }
+
+    if (document.isPublished && !document.isArchived) {
+      return document;
+    }
+
+    if (!identity) {
+      throw new Error("not authenticated");
+    }
+
+    const userId = identity.subject;
+
+    if (document.userId !== userId) {
+      throw new Error("Unauthorized");
+    }
+
+    return document;
   },
 });
